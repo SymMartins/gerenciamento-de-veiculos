@@ -31,3 +31,16 @@ def menu(lista):
     print(lin())
     opc = leiaInt('Sua Opção: ')
     return opc
+
+
+def submenu(lista):
+    cabecalho('VEÍCULOS')
+    c = 1
+    for item in lista:
+        print(f'{c} - {item}')
+        c += 1
+    print(lin())
+    opc = leiaInt('Sua Opção: ')
+    return opc
+
+
