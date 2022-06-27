@@ -33,8 +33,8 @@ def menu(lista):
     return opc
 
 
-def submenu(lista):
-    cabecalho('VEÍCULOS')
+def submenuMotorista(lista):
+    cabecalho('CADASTRO DE MOTORISTAS')
     c = 1
     for item in lista:
         print(f'{c} - {item}')
@@ -44,3 +44,12 @@ def submenu(lista):
     return opc
 
 
+def submenuVeiculo(lista):
+    cabecalho('CADASTRO DE VEÍCULOS')
+    c = 1
+    for item in lista:
+        print(f'{c} - {item}')
+        c += 1
+    print(lin())
+    opc = leiaInt('Sua Opção: ')
+    return opc

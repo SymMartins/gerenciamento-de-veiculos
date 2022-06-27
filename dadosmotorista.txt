@@ -1,4 +1,0 @@
-Pedro; Rua Barão De Maua, 80; 22992329821; 198
-João; Rua Bahia 90; 2225227615; 123456
-Pedro; Rua Salomão; 22958361020; 987654
-Renata; Rua Babi 30; 25227070; 456

@@ -30,7 +30,7 @@ def cadastraMotorista(dadosMotorista, nome, end, tel, cnh):
         print(f'ERRO ao abrir o arquivo {dadosMotorista}!')
     else:
         try:
-            a.write(f'{nome}; {end}; {tel}; {cnh}\n')
+            a.write(f'nome: {nome}; end: {end}; tel: {tel}; CNH: {cnh}\n')
         except:
             print('ERRO! Ao escrever os dados!')
         else:

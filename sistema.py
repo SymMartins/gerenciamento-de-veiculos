@@ -2,25 +2,43 @@ from interface import *
 from dados import *
 from time import sleep
 
-dados_motorista = 'dadosmotorista.txt'
+dados_motorista = 'dadosmotorista.xml'
 dados_veiculos = 'dadosveiculos.xml'
 
 while True:
-    resposta = menu(['Cadastrar Motoristas', 'Cadastrar Veículos', 'Motoristas Cadastrados', 'Sair do Sistema'])
-    if resposta == 1:
-        if not dadosMotorista(dados_motorista):
-            criaDadosMotorista(dados_motorista)
 
-        cabecalho('CADASTRO DE MOTORISTA')
-        nome = str(input('Nome: ')).title().strip()
-        end = str(input('End: ')).title().strip()
-        tel = int(input('Tel: '))
-        cnh = int(input('CNH: '))
-        cadastraMotorista(dados_motorista, nome, end, tel, cnh)
+    resposta = menu(['Cadastrar Motoristas', 'Cadastrar Veículos', 'Sair do Sistema'])
+    if resposta == 1:
+        while True:
+            resposta = submenuMotorista(['Cadastrar Motorista', 'Motoristas Cadastrados', 'Deletar Motorista', 'Menu Principal'])
+            if resposta == 1:  # Cadastra Motorista
+                if not dadosMotorista(dados_motorista):  # se não tiver um arquivo ele cria o arquivo dados do motorista
+                    criaDadosMotorista(dados_motorista)
+
+                cabecalho('CADASTRO DE MOTORISTA')
+                nome = str(input('Nome: ')).title().strip()
+                end = str(input('End: ')).title().strip()
+                tel = int(input('Tel: '))
+                cnh = int(input('CNH: '))
+                cadastraMotorista(dados_motorista, nome, end, tel, cnh)
+
+            elif resposta == 2:  # Ler os dados dos motoristas
+                lerDadosMotoristas(dados_motorista)
+
+            elif resposta == 3:  # Deletar um motorista do cadastro
+                pass
+
+            elif resposta == 4:  # Volta ao menu principal
+                cabecalho('Voltando ao menu principal')
+                break
+
+            else:
+                print('ERRO!! Digite uma opçao válida')
+                sleep(0.5)
 
     elif resposta == 2:
         while True:
-            resposta = submenu(['Cadastrar Veículo', 'Veículos Cadastrados', 'Menu Principal'])
+            resposta = submenuVeiculo(['Cadastrar Veículo', 'Veículos Cadastrados', 'Menu Principal'])
             if resposta == 1:
                 if not dadosVeiculos(dados_veiculos):
                     criaDadosVeiculos(dados_veiculos)
@@ -44,9 +62,6 @@ while True:
             sleep(0.5)
 
     elif resposta == 3:
-        lerDadosMotoristas(dados_motorista)
-
-    elif resposta == 4:
         cabecalho('Saindo do sistema...')
         break
     else:
