@@ -10,7 +10,8 @@ while True:
     resposta = menu(['Cadastrar Motoristas', 'Cadastrar Veículos', 'Sair do Sistema'])
     if resposta == 1:
         while True:
-            resposta = submenuMotorista(['Cadastrar Motorista', 'Motoristas Cadastrados', 'Deletar Motorista', 'Menu Principal'])
+            resposta = submenuMotorista(['Cadastrar Motorista', 'Motoristas Cadastrados', 'Deletar Motorista',
+                                         'Menu Principal'])
             if resposta == 1:  # Cadastra Motorista
                 if not dadosMotorista(dados_motorista):  # se não tiver um arquivo ele cria o arquivo dados do motorista
                     criaDadosMotorista(dados_motorista)
