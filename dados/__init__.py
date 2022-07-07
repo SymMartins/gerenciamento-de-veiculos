@@ -2,6 +2,7 @@ from interface import *
 import mysql.connector
 from mysql.connector import Error
 
+
 #  Dados dos Motoristas
 
 
@@ -38,42 +39,47 @@ def criaTabelaDadosMotorista(nome):
 
 def cadastraMotorista():
     #  Capta os dados do motorista
-    Nome = input('Nome: ').title().strip()
-    End1 = input('End1: ').title().strip()
-    End2 = input('End2: ').title().strip()
-    Tel = input('Tel: ')
-    Cnh = input('CNH: ')
+    while True:
+        Nome = input('Nome: ').title().strip()
+        End1 = input('End1: ').title().strip()
+        End2 = input('End2: ').title().strip()
+        Tel = input('Tel: ')
+        Cnh = input('CNH: ')
 
-    dados = '\'' + Nome + '\'' + ',\'' + End1 + '\'' + ',\'' + End2 + '\'' + ',\''\
-            + Tel + '\'' + ',\'' + Cnh + '\'' + ')'
-    declaracao = """INSERT INTO tbldadosmotorista 
-    (Nome, Endereco1, Endereco2, Telefone, CNH)
-        VALUES ( """
-    sql = declaracao + dados
+        dados = '\'' + Nome + '\'' + ',\'' + End1 + '\'' + ',\'' + End2 + '\'' + ',\'' \
+                + Tel + '\'' + ',\'' + Cnh + '\'' + ')'
+        declaracao = """INSERT INTO tbldadosmotorista 
+        (Nome, Endereco1, Endereco2, Telefone, CNH)
+            VALUES ( """
+        sql = declaracao + dados
 
-    try:
-        #  Cria conexão com o banco de dados:
-        con = mysql.connector.connect(host='localhost', database='db_ger_frotas',
-                                      user='root', password='Smb@162534')
+        try:
+            #  Cria conexão com o banco de dados:
+            con = mysql.connector.connect(host='localhost', database='db_ger_frotas',
+                                          user='root', password='Smb@162534')
 
-        # Declaração SQL para ser executada:
-        cadastra_dados = sql
+            # Declaração SQL para ser executada:
+            cadastra_dados = sql
 
-        # criar cursor e executar SQL no banco de dados:
-        cursor = con.cursor()
-        cursor.execute(cadastra_dados)
-        con.commit()
-        print(cursor.rowcount, 'Cadastro Efetuado com sucesso!')
+            # criar cursor e executar SQL no banco de dados:
+            cursor = con.cursor()
+            cursor.execute(cadastra_dados)
+            con.commit()
+            print(cursor.rowcount, 'Cadastro Efetuado com sucesso!')
 
-        #  Mostra o erro na criação da tabela:
-    except Error as erro:
-        print(f'Falha ao Cadastrar!Erro: {erro}')
+            #  Mostra o erro na criação da tabela:
+        except Error as erro:
+            print(f'Falha ao Cadastrar!Erro: {erro}')
 
-    finally:
-        #  Encerra a conexão com o banco de dados
-        if con.is_connected():
-            cursor.close()
-            con.close()
+        finally:
+            #  Encerra a conexão com o banco de dados
+            if con.is_connected():
+                cursor.close()
+                con.close()
+
+        sair = str(input('Deseja cadastrar outro motorista ? [S/N]')).upper().strip()[0]
+        if sair == 'N':
+            break
 
 
 def lerDadosMotorista():
@@ -106,10 +112,7 @@ def lerDadosMotorista():
             #  print("Conexão ao MySQL foi encerrada")
 
 
-def deletaMotorista():
-    #  Capta o Id do Motorista a ser Deletado:
-    idMotorista = input('ID do Motorista: ')
-
+def deletaMotorista(idMotorista):
     apaga = "DELETE FROM  tbldadosmotorista WHERE idMotorista = {}".format(idMotorista)
 
     try:
@@ -135,6 +138,7 @@ def deletaMotorista():
         if con.is_connected():
             cursor.close()
             con.close()
+
 
 #  Dados dos Veículos
 
@@ -171,43 +175,48 @@ def criaTabelaDadosVeiculos(nome):
 
 
 def cadastraVeiculo():
-    #  Capta os dados do motorista
-    Marca = input('Marca: ').title().strip()
-    Modelo = input('Modelo: ').title().strip()
-    Ano_de_Fabricacao = input('Ano de Fabricação: ')
-    Quilometragem = input('Quilometragem: ')
-    Chassi = input('Chassi: ')
+    while True:
+        #  Capta os dados do motorista
+        Tipo = input('Tipo [Carro / Caminhão / Moto / Outro: ')
+        Marca = input('Marca: ').title().strip()
+        Modelo = input('Modelo: ').title().strip()
+        Ano_de_Fabricacao = input('Ano de Fabricação: ')
+        Quilometragem = input('Quilometragem: ')
+        Chassi = input('Chassi: ')
 
-    dados = '\'' + Marca + '\'' + ',\'' + Modelo + '\'' + ',\'' + Ano_de_Fabricacao + '\'' + \
-            ',\'' + Quilometragem + '\'' + ',\'' + Chassi + '\'' + ')'
-    declaracao = """INSERT INTO tbldadosveiculos 
-    (Marca, Modelo, Ano_de_Fabricação, Quilometragem, Chassi)
-        VALUES ( """
-    sql = declaracao + dados
+        dados = '\'' + Tipo + '\'' + ',\'' + Marca + '\'' + ',\'' + Modelo + '\'' + ',\'' + Ano_de_Fabricacao + '\'' + \
+                ',\'' + Quilometragem + '\'' + ',\'' + Chassi + '\'' + ')'
+        declaracao = """INSERT INTO tbldadosveiculos 
+        (Tipo, Marca, Modelo, Ano_de_Fabricação, Quilometragem, Chassi)
+            VALUES ( """
+        sql = declaracao + dados
 
-    try:
-        #  Cria conexão com o banco de dados:
-        con = mysql.connector.connect(host='localhost', database='db_ger_frotas',
-                                      user='root', password='Smb@162534')
+        try:
+            #  Cria conexão com o banco de dados:
+            con = mysql.connector.connect(host='localhost', database='db_ger_frotas',
+                                          user='root', password='Smb@162534')
 
-        # Declaração SQL para ser executada:
-        cadastra_dados = sql
+            # Declaração SQL para ser executada:
+            cadastra_dados = sql
 
-        # criar cursor e executar SQL no banco de dados:
-        cursor = con.cursor()
-        cursor.execute(cadastra_dados)
-        con.commit()
-        print(cursor.rowcount, 'Cadastro de Veículo Efetuado com Sucesso!')
+            # criar cursor e executar SQL no banco de dados:
+            cursor = con.cursor()
+            cursor.execute(cadastra_dados)
+            con.commit()
+            print(cursor.rowcount, 'Cadastro de Veículo Efetuado com Sucesso!')
 
-        #  Mostra o erro na criação da tabela:
-    except Error as erro:
-        print(f'Falha ao Cadastrar!erro {erro}')
+            #  Mostra o erro na criação da tabela:
+        except Error as erro:
+            print(f'Falha ao Cadastrar!erro {erro}')
 
-    finally:
-        #  Encerra a conexão com o banco de dados
-        if con.is_connected():
-            cursor.close()
-            con.close()
+        finally:
+            #  Encerra a conexão com o banco de dados
+            if con.is_connected():
+                cursor.close()
+                con.close()
+        sair = str(input('Deseja cadastrar outro Veículo ? [S/N]')).upper().strip()[0]
+        if sair == 'N':
+            break
 
 
 def lerDadosVeiculo():
@@ -225,8 +234,9 @@ def lerDadosVeiculo():
         linhas = cursor.fetchall()
 
         for linha in linhas:
-            print('Id Veículo: ', linha[0], '-', 'Marca: ', linha[1], '-', 'Modelo: ', linha[2], '-',
-                  'Ano de Fabricação: ', linha[3], '-', 'Quilometragem: ', linha[4], '-', 'Chassi: ', linha[5])
+            print('Id Veículo:', linha[0], '-', 'Tipo:', linha[1], '-', 'Marca:', linha[2],
+                  '-', 'Modelo:', linha[3], '-', 'Ano de Fabricação:', linha[4],
+                  '-', 'Quilometragem:', linha[5], '-', 'Chassi:', linha[6])
 
         #  Mostra o erro na criação da tabela:
     except Error as erro:
@@ -239,10 +249,7 @@ def lerDadosVeiculo():
             con.close()
 
 
-def deletaVeiculo():
-    #  Capta o Id do Motorista a ser Deletado:
-    idVeiculo = input('ID do Veículo: ')
-
+def deletaVeiculo(idVeiculo):
     apaga = "DELETE FROM  tbldadosveiculos WHERE idVeiculo = {}".format(idVeiculo)
 
     try:
