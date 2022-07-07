@@ -1,5 +1,5 @@
 from interface import *
-from dados1 import *
+from dados import *
 from time import sleep
 
 dados_motorista = 'tblDadosMotorista'
@@ -12,7 +12,6 @@ while True:
             resposta = submenuMotorista(['Cadastrar Motorista', 'Motoristas Cadastrados',
                                          'Deletar Motorista', 'Menu Principal'])
             if resposta == 1:  # Cria Tabela e Cadastra um motorista
-                #  if not tabelaExiste(dados_motorista):
                 criaTabelaDadosMotorista(dados_motorista)
                 cabecalho('CADASTRO DE MOTORISTA')
                 cadastraMotorista()
