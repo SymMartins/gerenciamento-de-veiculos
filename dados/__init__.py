@@ -152,11 +152,16 @@ def criaTabelaDadosVeiculos(nome):
         # Declaração SQL para ser executada:
         criar_tabela_SQL = """CREATE TABLE if not exists {} (
         IdVeiculo INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+        Tipo VARCHAR(20) not null,
         Marca VARCHAR(100) not null,
         Modelo VARCHAR(100) not null,
-        Ano_de_Fabricação VARCHAR(100) not null,
-        Quilometragem VARCHAR(100) not null,
-        Chassi VARCHAR (100)not null)""".format(nome)
+        Ano_de_Fabricação VARCHAR(20) not null,
+        Placa VARCHAR(10) not null,
+        Quilometragem VARCHAR(20) not null,
+        Combustivel VARCHAR(20) not null,
+        Volume_Tanque INT (20) not null,
+        Chassi VARCHAR (20) not null,
+        Renavam VARCHAR(20) not null)""".format(nome)
 
         # criar cursor e executar SQL no banco de dados:
         cursor = con.cursor()
@@ -165,7 +170,7 @@ def criaTabelaDadosVeiculos(nome):
 
         #  Mostra o erro na criação da tabela:
     except mysql.connector.Error as erro:
-        print(f'Falha ao criar tabela Veículos!')
+        print(f'Falha ao criar tabela Veículos!erro {erro}')
 
     finally:
         #  Encerra a conexão com o banco de dados
@@ -176,18 +181,23 @@ def criaTabelaDadosVeiculos(nome):
 
 def cadastraVeiculo():
     while True:
-        #  Capta os dados do motorista
-        Tipo = input('Tipo [Carro / Caminhão / Moto / Outro: ')
+        #  Capta os dados do Carro
+        Tipo = input('Tipo [Carro / Caminhão / Moto / Outro: ').title().strip()
         Marca = input('Marca: ').title().strip()
         Modelo = input('Modelo: ').title().strip()
-        Ano_de_Fabricacao = input('Ano de Fabricação: ')
-        Quilometragem = input('Quilometragem: ')
-        Chassi = input('Chassi: ')
+        Ano_de_Fabricacao = input('Ano de Fabricação: ').strip()
+        Placa = input('Placa: ').strip()
+        Quilometragem = input('Quilometragem: ').strip()
+        Combustivel = input('Combustível: ').title().strip()
+        Volume_Tanque = input('Volume do Tanque (Em Litros): ').strip()
+        Chassi = input('Chassi: ').strip()
+        Renavam = input('Renavam: ').strip()
 
-        dados = '\'' + Tipo + '\'' + ',\'' + Marca + '\'' + ',\'' + Modelo + '\'' + ',\'' + Ano_de_Fabricacao + '\'' + \
-                ',\'' + Quilometragem + '\'' + ',\'' + Chassi + '\'' + ')'
+        dados = '\'' + Tipo + '\'' + ',\'' + Marca + '\'' + ',\'' + Modelo + '\'' + ',\'' + Ano_de_Fabricacao + \
+                '\'' + ',\'' + Placa + '\'' + ',\'' + Quilometragem + '\'' + ',\'' + Combustivel + '\'' + \
+                ',' + Volume_Tanque + ',\'' + Chassi + '\'' + ',\'' + Renavam + '\'' + ')'
         declaracao = """INSERT INTO tbldadosveiculos 
-        (Tipo, Marca, Modelo, Ano_de_Fabricação, Quilometragem, Chassi)
+        (Tipo, Marca, Modelo, Ano_de_Fabricação, Placa, Quilometragem, Combustivel, Volume_Tanque, Chassi, Renavam)
             VALUES ( """
         sql = declaracao + dados
 
@@ -236,7 +246,9 @@ def lerDadosVeiculo():
         for linha in linhas:
             print('Id Veículo:', linha[0], '-', 'Tipo:', linha[1], '-', 'Marca:', linha[2],
                   '-', 'Modelo:', linha[3], '-', 'Ano de Fabricação:', linha[4],
-                  '-', 'Quilometragem:', linha[5], '-', 'Chassi:', linha[6])
+                  '-', 'Placa:', linha[5], '-', 'Quilometragem:', linha[6],
+                  '-', 'Combustivel:', linha[7], '-', 'Volume do Tanque (L):', linha[8],
+                  '-', 'Chassi:', linha[9], '-', 'Renavam:', linha[10])
 
         #  Mostra o erro na criação da tabela:
     except Error as erro:

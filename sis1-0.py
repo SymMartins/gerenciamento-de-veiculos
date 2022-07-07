@@ -6,7 +6,7 @@ dados_motorista = 'tblDadosMotorista'
 dados_veiculos = 'tblDadosVeiculos'
 
 while True:
-    resposta = menu(['Cadastrar Motoristas', 'Cadastrar Veículos', 'Sair do Sistema'])
+    resposta = menu(['Cadastro de Motoristas', 'Cadastro de Veículos', 'Sair do Sistema'])
     if resposta == 1:  # Relacionado ao cadastro de motoristas
         sleep(0.3)
         while True:
