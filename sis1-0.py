@@ -16,7 +16,7 @@ while True:
                 cabecalho('CADASTRO DE MOTORISTA')
                 cadastraMotorista()
 
-            elif resposta == 2:  # Lista motoristas cadastrados
+            elif resposta == 2:  # Lista de motoristas cadastrados
                 cabecalho('MOTORISTAS CADASTRADOS')
                 lerDadosMotorista()
 
@@ -40,7 +40,7 @@ while True:
                 cabecalho('CADASTRO DE VEÍCULOS')
                 cadastraVeiculo()
 
-            elif resposta == 2:  # Lista Veículos cadastrados
+            elif resposta == 2:  # Lista de Veículos cadastrados
                 lerDadosVeiculo()
 
             elif resposta == 3:  # Deleta Veículo cadastrado
