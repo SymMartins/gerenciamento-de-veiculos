@@ -3,7 +3,7 @@ import mysql.connector
 from mysql.connector import Error
 
 
-#  Dados dos Motoristas
+#  Dados dos Motoristas:
 
 
 def criaTabelaDadosMotorista(nome):
@@ -140,7 +140,7 @@ def deletaMotorista(idMotorista):
             con.close()
 
 
-#  Dados dos Veículos
+#  Dados dos Veículos:
 
 
 def criaTabelaDadosVeiculos(nome):
@@ -287,3 +287,7 @@ def deletaVeiculo(idVeiculo):
         if con.is_connected():
             cursor.close()
             con.close()
+
+#  Cadastro de Abastecimento:
+
+# Cadastro de Manutenções:
